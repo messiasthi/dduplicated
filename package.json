@@ -3,6 +3,16 @@
   "version": "0.0.1",
   "description": "The command line to find and manager duplicated files in linux, mac and windows(available soon). ",
   "main": "index.js",
+  "author": "Thiago Messias",
+  "license": "GPL-3.0",
+  "homepage": "https://github.com/messiasthi/dduplicated-cli#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/messiasthi/dduplicated-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/messiasthi/dduplicated-cli/issues"
+  },
   "scripts": {
     "test": "npm test"
   },
@@ -18,8 +28,6 @@
     "line",
     "cli"
   ],
-  "author": "Thiago Messias",
-  "license": "GPL-3.0",
   "dependencies": {
     "shelljs": "^0.7.4",
     "sqlite3": "^3.1.4"
