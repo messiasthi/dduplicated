@@ -14,7 +14,7 @@
     "url": "https://github.com/messiasthi/dduplicated-cli/issues"
   },
   "scripts": {
-    "test": "npm test"
+    "test": "jasmine"
   },
   "keywords": [
     "duplicate",
@@ -29,13 +29,17 @@
     "cli"
   ],
   "dependencies": {
-    "shelljs": "^0.7.4",
-    "sqlite3": "^3.1.4"
+    "shelljs": "^0.7.4"
   },
   "devDependencies": {
     "eslint": "^3.4.0",
     "eslint-config-google": "^0.6.0",
+    "gulp": "^3.9.1",
     "jasmine": "^2.5.0",
     "jsdoc": "^3.4.0"
+  },
+
+  "bin": {
+    "dduplicated": "src/findDuplicates.js"
   }
 }
