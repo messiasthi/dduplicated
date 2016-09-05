@@ -2,9 +2,9 @@
   "name": "dduplicated-cli",
   "version": "0.0.1",
   "description": "The command line to find and manager duplicated files in linux, mac and windows(available soon). ",
-  "main": "index.js",
   "author": "Thiago Messias",
   "license": "GPL-3.0",
+  "main": "index.js",
   "homepage": "https://github.com/messiasthi/dduplicated-cli#readme",
   "repository": {
     "type": "git",
@@ -12,9 +12,6 @@
   },
   "bugs": {
     "url": "https://github.com/messiasthi/dduplicated-cli/issues"
-  },
-  "scripts": {
-    "test": "jasmine"
   },
   "keywords": [
     "duplicate",
@@ -35,11 +32,13 @@
     "eslint": "^3.4.0",
     "eslint-config-google": "^0.6.0",
     "gulp": "^3.9.1",
-    "jasmine": "^2.5.0",
+    "jasmine-node": "^1.14.5",
     "jsdoc": "^3.4.0"
   },
-
+  "scripts": {
+    "test": "jasmine-node test"
+  },
   "bin": {
-    "dduplicated": "src/findDuplicates.js"
+    "dduplicated": "index.js"
   }
 }
