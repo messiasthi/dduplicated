@@ -1,4 +1,16 @@
 {
-    "extends": "google",
-    "installedESLint": true
+    "extends": "airbnb",
+    "plugins": [
+        "react",
+        "jsx-a11y",
+        "import"
+    ],
+    "globals": {
+      "describe": true,
+      "it": true,
+      "expect": true
+    },
+    "rules": {
+      "no-console": ["error", { "allow": [ "warn", "error", "log"] }]
+    }
 }

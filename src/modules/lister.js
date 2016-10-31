@@ -1,28 +1,40 @@
 /**
  * The lister module contain the methods to list directories and file.
  */
+const shell = require('shelljs');
+const fs = require('fs');
 
-var shell = require('shelljs');
+export default class Lister {
 
-var lister = {
-  listFile: function(path) {
-    console.log(path);
-    var res = shell.ls(path);
-    console.log(res);
+  /**
+   * List only files presents in `path`
+   * @method listFiles
+   * @param  {String} path The directory path
+   * @return {Array}       List of files presents in directory
+   */
+  static listFiles(path) {
+    // console.log(path);
+    const res = [];
+    fs.readdir(path, (err, files) => {
+      files.forEach((file) => {
+        res.push(file);
+      });
+    });
+    // console.log(res);
     return res;
-  },
-  listDir: function(path) {
+  }
+
+  static listDir(path) {
     console.log(path);
-    var res = shell.ls(path);
-    console.log(res);
-    return res;
-  },
-  list: function(path) {
-    console.log(path);
-    var res = shell.ls(path);
+    const res = shell.ls(path);
     console.log(res);
     return res;
   }
-};
 
-module.exports = lister;
+  static list(path) {
+    console.log(path);
+    const res = shell.ls(path);
+    console.log(res);
+    return res;
+  }
+}

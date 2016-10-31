@@ -26,17 +26,25 @@
     "cli"
   ],
   "dependencies": {
-    "shelljs": "^0.7.4"
+    "install": "^0.8.2",
+    "md5-file": "^3.1.1",
+    "npm": "^3.10.9",
+    "shelljs": "^0.7.4",
+    "jasmine-es6": "^0.4.0"
   },
   "devDependencies": {
-    "eslint": "^3.4.0",
-    "eslint-config-google": "^0.6.0",
-    "gulp": "^3.9.1",
-    "jasmine-node": "^1.14.5",
+    "babel-cli": "^6.18.0",
+    "eslint": "^3.9.0",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-plugin-import": "^2.0.1",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.4.1",
+    "jasmine": "^2.5.2",
     "jsdoc": "^3.4.0"
   },
   "scripts": {
-    "test": "jasmine-node test"
+    "test": "jasmine",
+    "build": "babel src -d ."
   },
   "bin": {
     "dduplicated": "index.js"
