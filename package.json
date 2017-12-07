@@ -1,17 +1,17 @@
 {
-  "name": "dduplicated-cli",
+  "name": "dduplicated",
   "version": "0.0.1",
   "description": "The command line to find and manager duplicated files in linux, mac and windows(available soon). ",
   "author": "Thiago Messias",
-  "license": "GPL-3.0",
+  "license": "MIT",
   "main": "index.js",
-  "homepage": "https://github.com/messiasthi/dduplicated-cli#readme",
+  "homepage": "https://github.com/messiasthi/dduplicated#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/messiasthi/dduplicated-cli.git"
+    "url": "git+https://github.com/messiasthi/dduplicated.git"
   },
   "bugs": {
-    "url": "https://github.com/messiasthi/dduplicated-cli/issues"
+    "url": "https://github.com/messiasthi/dduplicated/issues"
   },
   "keywords": [
     "duplicate",
@@ -26,14 +26,16 @@
     "cli"
   ],
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
     "install": "^0.8.2",
+    "jasmine-es6": "^0.4.0",
     "md5-file": "^3.1.1",
     "npm": "^3.10.9",
-    "shelljs": "^0.7.4",
-    "jasmine-es6": "^0.4.0"
+    "shelljs": "^0.7.4"
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0",
+    "babel-cli": "^6.26.0",
     "eslint": "^3.9.0",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-plugin-import": "^2.0.1",
@@ -43,7 +45,7 @@
     "jsdoc": "^3.4.0"
   },
   "scripts": {
-    "test": "jasmine",
+    "test": "babel-node spec/run.js",
     "build": "babel src -d ."
   },
   "bin": {
