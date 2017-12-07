@@ -1,4 +1,3 @@
-// Load module to test
 import install from 'jasmine-es6';
 import Lister from '../src/modules/Lister';
 
@@ -13,7 +12,7 @@ install();
  */
 
 describe('Lister', () => {
-  it('should be list all files and directories', () => {
+  it('Should be list all files and directories', () => {
     const list = Lister.listAll(`${process.env.PWD}/spec/dirTest`);
     const expected = [
       'dir1',
@@ -28,7 +27,7 @@ describe('Lister', () => {
     expect(list).toEqual(expected);
   });
 
-  it('should be list only the files in directory', () => {
+  it('Should be list only the files in directory', () => {
     const fileList = Lister.listFiles(`${process.env.PWD}/spec/dirTest`);
     const expected = [
       'test1.txt',
@@ -39,7 +38,7 @@ describe('Lister', () => {
     expect(fileList).toEqual(expected);
   });
 
-  it('should be list only directories', () => {
+  it('Should be list only directories', () => {
     const dirList = Lister.listDir(`${process.env.PWD}/spec/dirTest`);
     const expected = [
       'dir1',
