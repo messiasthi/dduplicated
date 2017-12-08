@@ -1,5 +1,5 @@
 import install from 'jasmine-es6';
-import Directory from '../src/modules/Directory';
+import Directory from '../../src/modules/Directory';
 
 // Prepare the jasmine
 install();
