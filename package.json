@@ -32,23 +32,25 @@
     "jasmine-es6": "^0.4.0",
     "md5-file": "^3.1.1",
     "npm": "^3.10.9",
-    "shelljs": "^0.7.4"
+    "shelljs": "^0.7.4",
+    "jasmine": "^2.5.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "editorconfig": "^0.15.0",
     "eslint": "^3.9.0",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-plugin-import": "^2.0.1",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.4.1",
-    "jasmine": "^2.5.2",
     "jsdoc": "^3.4.0"
   },
   "scripts": {
-    "test": "babel-node spec/run.js",
-    "build": "babel src -d ."
+    "test": "babel spec/**/*.js -d es5 && jasmine es5/spec/support/jasmine.json",
+    "run": "babel-node src/main.js",
+    "build": "babel src/*.js src/**/*.js -d bin/"
   },
   "bin": {
-    "dduplicated": "index.js"
+    "dduplicated": "es5/src/main.js"
   }
 }

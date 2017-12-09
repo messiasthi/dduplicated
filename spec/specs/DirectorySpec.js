@@ -1,8 +1,5 @@
-import install from 'jasmine-es6';
+import jasmine from 'jasmine';
 import Directory from '../../src/modules/Directory';
-
-// Prepare the jasmine
-install();
 
 /**
  * Create the session of tests
@@ -12,6 +9,11 @@ install();
  */
 
 describe('Directory', () => {
+
+  beforeAll(() => {
+    console.log('All tests are runing on this directory', process.env.PWD);
+  });
+
   it('Should be equals to list all directories', () => {
     const dir = new Directory(`${process.env.PWD}/spec/dirTest`);
     const list = dir.getDirectories();
@@ -21,14 +23,14 @@ describe('Directory', () => {
       'dir3',
       'dir4',
       'emptyDirectory'];
-    expect(list).toEqual(expected);
+    expect(list).toEqual(jasmine.arrayContaining(expected));
   });
 
   it('Should be equals empty list of directories', () => {
     const dir = new Directory(`${process.env.PWD}/spec/dirTest/emptyDirectory`);
     const list = dir.getDirectories();
     const expected = [];
-    expect(list).toEqual(expected);
+    expect(list).toEqual(jasmine.arrayContaining(expected));
   });
 
   it('Should be not equals to list of directories', () => {
@@ -39,7 +41,7 @@ describe('Directory', () => {
       'dir2',
       'dir3',
       'dir4'];
-    expect(list).notEqual(expected);
+    expect(list).not.toEqual(jasmine.arrayContaining(expected));
   });
 
   it('Should be equals to list all files and directories', () => {
@@ -56,14 +58,14 @@ describe('Directory', () => {
       'test3.txt',
       'test4.txt',
     ];
-    expect(list).notEqual(expected);
+    expect(list).not.toEqual(jasmine.arrayContaining(expected));
   });
 
   it('Should be equals to empty list', () => {
     const dir = new Directory(`${process.env.PWD}/spec/dirTest/emptyDirectory`);
     const list = dir.getFilesAndDirectories();
     const expected = [];
-    expect(list).toEqual(expected);
+    expect(list).toEqual(jasmine.arrayContaining(expected));
   });
 
   it('Should be list only the files in directory', () => {
@@ -75,13 +77,44 @@ describe('Directory', () => {
       'test3.txt',
       'test4.txt',
     ];
-    expect(list).toEqual(expected);
+    expect(list).toEqual(jasmine.arrayContaining(expected));
   });
 
   it('Should be equals to empty list', () => {
     const dir = new Directory(`${process.env.PWD}/spec/dirTest/emptyDirectory`);
     const list = dir.getFiles();
     const expected = [];
-    expect(list).toEqual(expected);
+    expect(list).toEqual(jasmine.arrayContaining(expected));
+  });
+
+  it('Should be add the new item in directory list', () => {
+    const dir = new Directory(`${process.env.PWD}/spec`);
+    dir.addDirectory('dirTest/dir1');
+    const expected = [
+      'specs',
+      'support',
+      'dirTest',
+      'dirTest/dir1'];
+    expected(dir.getDirectories).toEqual(jasmine.arrayContaining(expected));
+  });
+
+  it('Should be fail on add the new item in directory list', () => {
+    const dir = new Directory(`${process.env.PWD}/spec`);
+    dir.addDirectory('dirTest/dir1/text1.txt');
+    const expected = [
+      'specs',
+      'support',
+      'dirTest',
+      'dirTest/dir1/text1.txt'];
+    expected(dir.getDirectories).not.toEqual(jasmine.arrayContaining(expected));
+  });
+
+  it('Should be fail on add the new item in file list', () => {
+    const dir = new Directory(`${process.env.PWD}/spec`);
+    dir.addDirectory('dirTest/dir1');
+    const expected = [
+      'run.js',
+      'dirTest/dir1'];
+    expected(dir.getDirectories).not.toEqual(jasmine.arrayContaining(expected));
   });
 });

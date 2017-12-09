@@ -1,8 +1,5 @@
-import install from 'jasmine-es6';
+import jasmine from 'jasmine';
 import File from '../src/modules/File';
-
-// Prepare the jasmine
-install();
 
 /**
  * Create the session of tests
@@ -19,13 +16,13 @@ describe('File', () => {
       'test2.txt',
       'test3.txt',
       'test4.txt'];
-    expect(list).toEqual(expected);
+    expect(list).toEqual(jasmine.arrayContaining(expected));
   });
 
   it('Should be equals empty list of files', () => {
     const list = File.list(`${process.env.PWD}/spec/dirTest/emptyFile`);
     const expected = [];
-    expect(list).toEqual(expected);
+    expect(list).toEqual(jasmine.arrayContaining(expected));
   });
 
   it('Should be not equals empty list of files', () => {
@@ -35,6 +32,6 @@ describe('File', () => {
       'test2.txt',
       'test3.txt',
       'test4.txt'];
-    expect(list).notEqual(expected);
+    expect(list).not.toEqual(jasmine.arrayContaining(expected));
   });
 });
