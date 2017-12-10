@@ -6,22 +6,31 @@ export default class Directory {
    * Initialize the Directory object and initialize variables
    * @param  {String} p The path of directory
    */
-  contructor(p) {
+  constructor(p) {
     this.files = [];
     this.directories = [];
-    if (typeof p !== 'string') {
-      this.path = '';
+
+    if (typeof p === 'string') {
+      // Remove double bars and other possible errors in path
+      this.path = path.normalize(p);
+    } else {
+      this.path = '.';
     }
-    // Remove double bars and other possible errors in path
-    this.path = path.normalize(p);
+
     // Check if is absolute path, case not, convert relative to absolute
     if (!path.isAbsolute(this.path)) {
       this.path = path.join(process.env.PWD, this.path);
     }
+    if (!this.path) {
+      console.error('The path is invalid', this.path);
+    }
+
     // Check if is directory
     if (fs.lstatSync(this.path).isDirectory()) {
       // Remove the end bar of path in case exists
-      if (this.path.substr(this.path.length - 1) === '/' || this.path.substr(this.path.length - 1) === '\\') {
+      const endBarUnix = this.path.substr(this.path.length - 1) === '/' && this.path.length > 1;
+      const endBarWin = this.path.substr(this.path.length - 1) === '\\' && this.path.length > 1;
+      if (endBarWin || endBarUnix) {
         this.path = this.path.substr(0, this.path.length - 1);
       }
       // Retrive the all files and directories in content of directory
@@ -60,7 +69,7 @@ export default class Directory {
     if (/^win/.test(process.platform)) {
       bar = '\\';
     }
-    const pth = path.normalize(`${this.path}${bar}${p}`);
+    const pth = path.normalize(`${this.getPath()}${bar}${p}`);
 
     if (fs.lstatSync(pth).isFile()) {
       this.files.push(pth.substr(this.path.length + 1));
@@ -90,7 +99,7 @@ export default class Directory {
     if (/^win/.test(process.platform)) {
       bar = '\\';
     }
-    const pth = path.normalize(`${this.path}${bar}${p}`);
+    const pth = path.normalize(`${this.getPath()}${bar}${p}`);
     // Check if is real path and if is directory
     if (fs.lstatSync(pth).isDirectory()) {
       this.directories.push(pth.substr(this.path.length + 1));
