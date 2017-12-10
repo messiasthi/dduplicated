@@ -1,5 +1,5 @@
-import jasmine from 'jasmine';
-import Directory from '../../src/modules/Directory';
+const jasmine = require('jasmine');
+const Directory = require('../../es5/src/modules/Directory');
 
 /**
  * Create the session of tests
