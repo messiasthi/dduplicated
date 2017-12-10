@@ -38,7 +38,7 @@ export default class Directory {
       res = fs.readdirSync(this.path);
 
       for (const item of res) {
-        if (fs.lstatSync(item).isDirectory()) {
+        if (fs.lstatSync(path.normalize(`${this.path}/${item}`)).isDirectory()) {
           this.addDirectory(item);
         } else {
           this.addFile(item);

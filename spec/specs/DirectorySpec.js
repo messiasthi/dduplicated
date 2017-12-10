@@ -5,11 +5,9 @@ import Directory from '../../src/modules/Directory';
  * @param  {function}            Cases of test
  * @return {void}
  */
-
 describe('Directory', () => {
-  // beforeAll(() => {
-  //   console.log('All tests are runing on this directory', process.env.PWD);
-  // });
+  console.log('The all tests are runing on this directory', process.env.PWD);
+
   it('Should be equals to current path', () => {
     const dir = new Directory(`${process.env.PWD}`);
     const expected = process.env.PWD;
@@ -82,22 +80,22 @@ describe('Directory', () => {
     const dir = new Directory(`${process.env.PWD}/spec`);
     dir.addDirectory('dirTest/dir1');
     const expected = [
+      'dirTest',
       'specs',
       'support',
-      'dirTest',
       'dirTest/dir1'];
-    expected(dir.getDirectories).toEqual(expected);
+    expect(dir.getDirectories()).toEqual(expected);
   });
 
   it('Should be fail on add the new item in directory list', () => {
     const dir = new Directory(`${process.env.PWD}/spec`);
-    dir.addDirectory('dirTest/dir1/text1.txt');
+    dir.addDirectory('dirTest/dir1/test1.txt');
     const expected = [
       'specs',
       'support',
       'dirTest',
-      'dirTest/dir1/text1.txt'];
-    expected(dir.getDirectories).not.toEqual(expected);
+      'dirTest/dir1/test1.txt'];
+    expect(dir.getDirectories()).not.toEqual(expected);
   });
 
   it('Should be fail on add the new item in file list', () => {
@@ -106,7 +104,7 @@ describe('Directory', () => {
     const expected = [
       'run.js',
       'dirTest/dir1'];
-    expected(dir.getDirectories).not.toEqual(expected);
+    expect(dir.getDirectories()).not.toEqual(expected);
   });
 
   it('Should be equals to list all files and directories', () => {
