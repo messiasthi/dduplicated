@@ -12,7 +12,7 @@ export default class Directory {
 
     if (typeof p === 'string') {
       // Remove double bars and other possible errors in path
-      this.path = path.normalize(p);
+      this.path = fs.realpathSync(path.normalize(p));
     } else {
       this.path = '.';
     }
@@ -99,7 +99,7 @@ export default class Directory {
     if (/^win/.test(process.platform)) {
       bar = '\\';
     }
-    const pth = path.normalize(`${this.getPath()}${bar}${p}`);
+    const pth = fs.realpathSync(path.normalize(`${this.getPath()}${bar}${p}`));
     // Check if is real path and if is directory
     if (fs.lstatSync(pth).isDirectory()) {
       this.directories.push(pth.substr(this.path.length + 1));
