@@ -8,7 +8,7 @@ export default class File {
    * @param  {[String]} p File path
    */
   constructor(p) {
-    if (typeof p === 'string') {
+    if (typeof p === 'string' && fs.existsSync(path.normalize(p))) {
       // Remove double bars and other possible errors in path
       this.path = fs.realpathSync(path.normalize(p));
     } else {

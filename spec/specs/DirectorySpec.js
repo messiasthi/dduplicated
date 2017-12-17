@@ -13,14 +13,14 @@ describe('Directory', () => {
   });
 
   it('Should be not equals to current path', () => {
-    const dir = new Directory('/');
+    const dir = new Directory(`${process.env.PWD}/spec`);
     const expected = process.env.PWD;
     expect(dir.getPath()).not.toBe(expected);
   });
 
   it('Should be equals to list all directories', () => {
     const dir = new Directory(`${process.env.PWD}/spec/dirTest`);
-    const list = dir.getDirectories();
+    const list = dir.getDirectoriesPath();
     const expected = [
       'dir1',
       'dir2',
@@ -32,14 +32,14 @@ describe('Directory', () => {
 
   it('Should be equals empty list of directories', () => {
     const dir = new Directory(`${process.env.PWD}/spec/dirTest/emptyDirectory`);
-    const list = dir.getDirectories();
+    const list = dir.getDirectoriesPath();
     const expected = [];
     expect(list).toEqual(expected);
   });
 
   it('Should be not equals to list of directories', () => {
     const dir = new Directory(`${process.env.PWD}/spec/dirTest/emptyDirectory`);
-    const list = dir.getDirectories();
+    const list = dir.getDirectoriesPath();
     const expected = [
       'dir1',
       'dir2',
@@ -57,7 +57,7 @@ describe('Directory', () => {
 
   it('Should be list only the files in directory', () => {
     const dir = new Directory(`${process.env.PWD}/spec/dirTest/dir1`);
-    const list = dir.getFiles();
+    const list = dir.getFilesPath();
     const expected = [
       'test1.txt',
       'test2.txt',
@@ -69,7 +69,7 @@ describe('Directory', () => {
 
   it('Should be equals to empty list', () => {
     const dir = new Directory(`${process.env.PWD}/spec/dirTest/emptyDirectory`);
-    const list = dir.getFiles();
+    const list = dir.getFilesPath();
     const expected = [];
     expect(list).toEqual(expected);
   });
@@ -82,7 +82,7 @@ describe('Directory', () => {
       'specs',
       'support',
       'dirTest/dir1'];
-    expect(dir.getDirectories()).toEqual(expected);
+    expect(dir.getDirectoriesPath()).toEqual(expected);
   });
 
   it('Should be fail on add the new item in directory list', () => {
@@ -93,7 +93,7 @@ describe('Directory', () => {
       'support',
       'dirTest',
       'dirTest/dir1/test1.txt'];
-    expect(dir.getDirectories()).not.toEqual(expected);
+    expect(dir.getDirectoriesPath()).not.toEqual(expected);
   });
 
   it('Should be fail on add the new item in file list', () => {
@@ -102,7 +102,7 @@ describe('Directory', () => {
     const expected = [
       'run.js',
       'dirTest/dir1'];
-    expect(dir.getDirectories()).not.toEqual(expected);
+    expect(dir.getDirectoriesPath()).not.toEqual(expected);
   });
 
   it('Should be equals to list all files and directories', () => {
