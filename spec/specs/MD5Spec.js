@@ -1,6 +1,11 @@
 import { getHash } from '../../src/helpers/MD5';
-
-describe('CryptoJS', () => {
+/**
+ * Create the session of tests
+ * @param  {String} Session Test session name
+ * @param  {function} Cases Cases to of test
+ * @return {void}
+ */
+describe('MD5', () => {
   it('Should be equals to file 1 hash', () => {
     const hash = getHash(`${process.env.PWD}/spec/dirTest/test1.txt`);
     const expected = 'f5c85408e67ef9a90f3e416863ba84de';
