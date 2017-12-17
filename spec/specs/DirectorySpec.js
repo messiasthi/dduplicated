@@ -6,8 +6,6 @@ import Directory from '../../src/modules/Directory';
  * @return {void}
  */
 describe('Directory', () => {
-  console.log('The all tests are runing on this directory', process.env.PWD);
-
   it('Should be equals to current path', () => {
     const dir = new Directory(`${process.env.PWD}`);
     const expected = process.env.PWD;
