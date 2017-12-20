@@ -75,13 +75,16 @@ describe('Directory', () => {
   });
 
   it('Should be add the new item in directory list', () => {
-    const dir = new Directory(`${process.env.PWD}/spec`);
-    dir.addDirectory('dirTest/dir1');
+    const dir = new Directory(`${process.env.PWD}/spec/dirTest`);
+    dir.addDirectory('dir4/dir1');
     const expected = [
-      'dirTest',
-      'specs',
-      'support',
-      'dirTest/dir1'];
+      'dir1',
+      'dir2',
+      'dir3',
+      'dir4',
+      'emptyDirectory',
+      'dir4/dir1',
+    ];
     expect(dir.getDirectoriesPath()).toEqual(expected);
   });
 

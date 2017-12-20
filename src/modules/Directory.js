@@ -8,7 +8,7 @@ export default class Directory {
    * @param  {String} p The path of directory
    */
   constructor(p, recursive) {
-    this.recursive = recursive;
+    this.recursive = recursive === true;
     this.files = [];
     this.directories = [];
     this.fileList = [];
