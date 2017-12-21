@@ -4,7 +4,7 @@
   "description": "The command line to find and manager duplicated files in linux, mac and windows(available soon). ",
   "author": "Thiago Messias",
   "license": "MIT",
-  "main": "index.js",
+  "main": "bin/src/main.js",
   "homepage": "https://github.com/messiasthi/dduplicated#readme",
   "repository": {
     "type": "git",
@@ -44,9 +44,9 @@
   "scripts": {
     "test": "babel-node node_modules/jasmine-node/lib/jasmine-node/cli.js --color spec",
     "run": "babel-node src/main.js",
-    "build": "babel-node src/*.js src/**/*.js -d bin/"
+    "build": "babel src/*.js src/**/*.js -d bin/"
   },
   "bin": {
-    "dduplicated": "bin/main.js"
+    "dduplicated": "bin/src/main.js"
   }
 }
