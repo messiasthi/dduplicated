@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getDuplicated = exports.getDuplicatedSync = undefined;
+exports.DuplicateScan = exports.getDuplicates = exports.getDuplicatesSync = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -48,7 +48,7 @@ var DuplicateScan = function () {
     key: 'scanDir',
     value: function scanDir(directory) {
       var directories = directory.getDirectories();
-      this.files.concat(directory.getFiles());
+      this.files = this.files.concat(directory.getFiles());
       if (directories.length > 0) {
         var _iteratorNormalCompletion = true;
         var _didIteratorError = false;
@@ -106,6 +106,7 @@ var DuplicateScan = function () {
               temp[file.getHash()].push(file);
             }
           }
+
           // Search file by file to identify duplicates
         } catch (err) {
           _didIteratorError2 = true;
@@ -134,6 +135,8 @@ var DuplicateScan = function () {
               this.duplicates[_file] = temp[_file];
             }
           }
+
+          // Clear memory
         } catch (err) {
           _didIteratorError3 = true;
           _iteratorError3 = err;
@@ -148,6 +151,9 @@ var DuplicateScan = function () {
             }
           }
         }
+
+        temp = {};
+        this.files = [];
       }
     }
     /**
@@ -156,8 +162,8 @@ var DuplicateScan = function () {
      */
 
   }, {
-    key: 'getDuplicated',
-    value: function getDuplicated() {
+    key: 'getDuplicates',
+    value: function getDuplicates() {
       return this.duplicates;
     }
   }]);
@@ -172,10 +178,9 @@ var DuplicateScan = function () {
  */
 
 
-exports.default = DuplicateScan;
-function getDuplicatedSync(root) {
+function getDuplicatesSync(root) {
   var dd = new DuplicateScan(root);
-  return dd.getDuplicated();
+  return dd.getDuplicates();
 }
 
 /**
@@ -183,7 +188,7 @@ function getDuplicatedSync(root) {
  * @param {String} root The path to directory
  * @return {Array} The array with list of duplicated files.
  */
-function getDuplicated(root) {
+function getDuplicates(root) {
   return new Promise(function (resolve, reject) {
     var dd = new DuplicateScan(root);
     if (dd === null || dd === undefined) {
@@ -192,14 +197,15 @@ function getDuplicated(root) {
         Object: dd,
         root: root
       });
-    } else if (dd.getDuplicated().length <= 0) {
-      console.info('We do not find duplicated files.');
+    } else if (dd.getDuplicates().length <= 0) {
       resolve([]);
     } else {
-      resolve(dd.getDuplicated());
+      resolve(dd.getDuplicates());
     }
   });
 }
 
-exports.getDuplicatedSync = getDuplicatedSync;
-exports.getDuplicated = getDuplicated;
+exports.getDuplicatesSync = getDuplicatesSync;
+exports.getDuplicates = getDuplicates;
+exports.DuplicateScan = DuplicateScan;
+exports.default = DuplicateScan;
