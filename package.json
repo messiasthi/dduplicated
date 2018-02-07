@@ -26,6 +26,7 @@
     "cli"
   ],
   "dependencies": {
+    "marked": "^0.3.12",
     "md5-file": "^3.2.3"
   },
   "devDependencies": {
