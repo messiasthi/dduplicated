@@ -6,8 +6,7 @@ A python script to remove all duplicated files in your directories.
 You can use the directory `test/dirTest` for make your tests, I recommend copy the `dirTest` content for other directory and use the new directory for make any test you want.
 
 ## Help
-dduplicate is a script in python for detect and delete duplicate files in your directory
-finded duplicated files, is possible delete, link or do nothing.
+dduplicate is a script in python for detect duplicated files in your finded directory, is possible delete, link or just detect.
 
 `dduplicate detect .` is default action
 ```
