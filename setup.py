@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 setup(
 	name="DDuplicate",
-	version="1.0",
-	description='The helper to find and manager duplicates of files',  # Required
+	version="1.1",
+	description='The helper to find and manager duplicates of files',
 	url='https://github.com/messiasthi/scopy',
 	author='Thiago Messias',
 	author_email='messiasthi@gmail.com',

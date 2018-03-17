@@ -15,7 +15,6 @@ Command:
 	--delete	PATHS	for delete any duplicated files in directory, not first file.
 	--link	PATHS	for link first all duplicates in first file.
 	--help		show this help
-	--verbose		show all actions and files paths searched
 ```
 
 ## Contributions and bug report
