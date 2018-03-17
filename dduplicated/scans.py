@@ -16,8 +16,6 @@ def addFile(path):
 		else:
 			files[hash] = [ path ]
 
-		files[hash].sort()
-
 def scanDir(path):
 	global visited
 	if not os.path.islink(path) and path not in ignored and path not in visited:
@@ -32,4 +30,10 @@ def scanDir(path):
 def scan(paths):
 	for path in paths:
 		scanDir(path)
+	global files
+	for (hash, paths) in files.items():
+		if len(paths) < 2:
+			del files[hash]
+		else:
+			files[hash].sort()
 	return files
