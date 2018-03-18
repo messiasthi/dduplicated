@@ -30,10 +30,11 @@ def scanDir(path):
 def scan(paths):
 	for path in paths:
 		scanDir(path)
-	global files
+
+	duplicates = {}
+	# Clear files without duplicates
 	for (hash, paths) in files.items():
-		if len(paths) < 2:
-			del files[hash]
-		else:
-			files[hash].sort()
-	return files
+		if len(paths) > 1:
+			paths.sort()
+			duplicates[hash] = paths
+	return duplicates
