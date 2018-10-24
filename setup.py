@@ -5,7 +5,7 @@ setup(
 	name="DDuplicate",
 	version="1.1",
 	description='The helper to find and manager duplicates of files',
-	url='https://github.com/messiasthi/scopy',
+	url='https://github.com/messiasthi/dduplicated',
 	author='Thiago Messias',
 	author_email='messiasthi@gmail.com',
 	packages=find_packages(),
