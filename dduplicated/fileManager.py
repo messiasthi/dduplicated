@@ -27,7 +27,7 @@ def manager(duplicates, createLink = False):
 		exit(0)
 
 	for filesByHash in duplicates.values():
-		managerFiles(filesByHash, link)
+		managerFiles(filesByHash, createLink)
 
 
 def delete(duplicates):
