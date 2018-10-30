@@ -1,20 +1,20 @@
 # The client of DDuplicated tool.
-import os
-import sys
+from os import path as opath, getcwd
+from sys import argv
 
 from dduplicated import commands
 
 def getPaths(params):
 	paths = []
 	for param in params:
-		path = os.path.join(os.getcwd(), param)
-		if os.path.exists(path) and os.path.isdir(path) and not os.path.islink(path):
+		path = opath.join(getcwd(), param)
+		if opath.exists(path) and opath.isdir(path) and not opath.islink(path):
 			paths.append(path)
 
 	return paths
 
 def main():
-	params = sys.argv
+	params = argv
 
 	# Remove the command name
 	del params[0]
@@ -29,7 +29,7 @@ def main():
 			exit(0)
 
 		for (key, values) in duplicates.items():
-			print(key + " -> ");
+			print(key + " -> ")
 			for value in values:
 				print("\t\t\t\t\t" + value)
 
