@@ -1,5 +1,5 @@
-#! /usr/bin/env python
 import os
+
 from dduplicated import hashs
 
 ignored = [ '..' ]
@@ -14,7 +14,7 @@ def addFile(path):
 			if path not in files[hash]:
 				files[hash].append(path)
 		else:
-			files[hash] = [ path ]
+			files.update({hash: [path]})
 
 def scanDir(path):
 	global visited

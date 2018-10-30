@@ -1,7 +1,7 @@
-#! /usr/bin/env python
 # The client of DDuplicated tool.
-import sys
 import os
+import sys
+
 from dduplicated import commands
 
 def getPaths(params):
