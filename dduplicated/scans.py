@@ -1,4 +1,4 @@
-import os
+from os import path as opath, walk
 
 from dduplicated import hashs
 
@@ -8,7 +8,7 @@ visited = []
 
 def addFile(path):
 	global files
-	if not os.path.islink(path):
+	if not opath.islink(path):
 		hash = hashs.getHash(path)
 		if hash in files:
 			if path not in files[hash]:
@@ -18,14 +18,14 @@ def addFile(path):
 
 def scanDir(path):
 	global visited
-	if not os.path.islink(path) and path not in ignored and path not in visited:
+	if not opath.islink(path) and path not in ignored and path not in visited:
 		visited.append(path)
-		for (root, directories, files) in os.walk(path, True):
+		for (root, directories, files) in walk(path, True):
 			for d in directories:
-				scanDir(os.path.join(root, d))
+				scanDir(opath.join(root, d))
 
 			for f in files:
-				addFile(os.path.join(root, f))
+				addFile(opath.join(root, f))
 
 def scan(paths):
 	for path in paths:
