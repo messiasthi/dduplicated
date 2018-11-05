@@ -1,11 +1,10 @@
 import os
 from threading import Thread
 
-def _delete(path):
+def _delete(path: str, src: str, link: bool):
 	os.remove(path)
-
-def _link(src, path):
-	os.symlink(src, path)
+	if link:
+		os.symlink(src, path)
 
 def manager_files(paths, link):
 	# The first file is preserved to not delete all files in directories.
@@ -22,12 +21,13 @@ def manager_files(paths, link):
 				src = path
 			
 			else:
-				Thread(target=_delete, args=(path)).start()
+				
+				Thread(target=_delete, args=(path, src, link)).start()
 				deleted_files.append(path)
 				
 				if link:
-					Thread(target=_link, args=(src, path)).start()
 					linked_files.append(path)
+		
 		else:
 			errors.append("Not identified by file: \"{}\"".format(path))
 	
