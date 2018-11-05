@@ -1,5 +1,6 @@
 # The client of DDuplicated tool.
 from os import path as opath, getcwd
+from pprint import pprint
 from sys import argv
 
 from dduplicated import commands
@@ -35,7 +36,7 @@ def main():
 		commands.help()
 	
 	if len(processed_files) > 0:
-		print(processed_files)
+		pprint(processed_files)
 	else:
 		print("No duplicates found")
 		print("Great! Bye!")
