@@ -50,6 +50,5 @@ def delete(duplicates):
 	return manager(duplicates)
 
 
-
 def link(duplicates):
 	return manager(duplicates, True)
