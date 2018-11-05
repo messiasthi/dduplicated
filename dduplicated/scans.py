@@ -1,40 +1,41 @@
-#! /usr/bin/env python
-import os
+from os import path as opath, walk
+
 from dduplicated import hashs
 
-ignored = [ '..' ]
+ignored = ['..']
 files = {}
 visited = []
 
-def addFile(path):
+def add_file(path):
 	global files
-	if not os.path.islink(path):
-		hash = hashs.getHash(path)
-		if hash in files:
-			if path not in files[hash]:
-				files[hash].append(path)
+	if not opath.islink(path):
+		file_hash = hashs.get_hash(path)
+		if file_hash in files:
+			if path not in files[file_hash]:
+				files[file_hash].append(path)
 		else:
-			files[hash] = [ path ]
+			files.update({file_hash: [path]})
 
-def scanDir(path):
+def scan_dir(path):
 	global visited
-	if not os.path.islink(path) and path not in ignored and path not in visited:
+	if not opath.islink(path) and path not in ignored and path not in visited:
 		visited.append(path)
-		for (root, directories, files) in os.walk(path, True):
+		for (root, directories, files) in walk(path, True):
 			for d in directories:
-				scanDir(os.path.join(root, d))
+				scan_dir(opath.join(root, d))
 
 			for f in files:
-				addFile(os.path.join(root, f))
+				add_file(opath.join(root, f))
+			
 
 def scan(paths):
 	for path in paths:
-		scanDir(path)
+		scan_dir(path)
 
 	duplicates = {}
 	# Clear files without duplicates
-	for (hash, paths) in files.items():
+	for (file_hash, paths) in files.items():
 		if len(paths) > 1:
 			paths.sort()
-			duplicates[hash] = paths
+			duplicates[file_hash] = paths
 	return duplicates

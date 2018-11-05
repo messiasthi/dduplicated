@@ -1,4 +1,3 @@
-#! /usr/bin/env python
 from dduplicated import scans, fileManager
 
 def detect(paths):
@@ -6,20 +5,21 @@ def detect(paths):
 
 # Remove all duplicates
 def delete(files):
-	fileManager.delete(files)
-	exit(0)
+	return fileManager.delete(files)
 
 # Make the link to first file
 def link(files):
-	fileManager.link(files)
-	exit(0)
+	return fileManager.link(files)
 
 # Print the help menu
 def help():
-	print("dduplicate is a simple script in python for detect and delete duplicate files in your directory")
-	print("finded duplicated files, is possible delete, link or do nothing.")
-	print("Command:")
-	print("\tdetect\tPATHS\tfor only search and detect duplicated files in directory.")
-	print("\tdelete\tPATHS\tfor delete any duplicated files in directory, not first file.")
-	print("\tlink\tPATHS\tfor link first all duplicates in first file.")
-	print("\thelp\t\tshow this help")
+	help = """
+	dduplicate is a simple script in python for detect and delete duplicate files in your directory
+	finded duplicated files, is possible delete, link or do nothing.
+	Command:
+	\tdetect\tPATHS\tfor only search and detect duplicated files in directory.
+	\tdelete\tPATHS\tfor delete any duplicated files in directory, not first file.
+	\tlink\tPATHS\tfor link first all duplicates in first file.
+	\thelp\t\tshow this help
+	"""
+	print(help)

@@ -1,42 +1,44 @@
-#! /usr/bin/env python
 # The client of DDuplicated tool.
-import sys
-import os
+from os import path as opath, getcwd
+from pprint import pprint
+from sys import argv
+
 from dduplicated import commands
 
-def getPaths(params):
+def get_paths(params):
 	paths = []
 	for param in params:
-		path = os.path.join(os.getcwd(), param)
-		if os.path.exists(path) and os.path.isdir(path) and not os.path.islink(path):
+		path = opath.join(getcwd(), param)
+		if opath.exists(path) and opath.isdir(path) and not opath.islink(path):
 			paths.append(path)
 
 	return paths
 
-def main():
-	params = sys.argv
 
+def main():
+	params = argv
+	processed_files = []
 	# Remove the command name
 	del params[0]
 
 	if len(params) == 0 or "help" in params:
 		commands.help()
 	elif "detect" in params:
-		duplicates = commands.detect(getPaths(params))
-		if len(duplicates) < 1:
-			print("No duplicates found")
-			print("Great! Bye!")
-			exit(0)
-
-		for (key, values) in duplicates.items():
-			print(key + " -> ");
-			for value in values:
-				print("\t\t\t\t\t" + value)
+		processed_files = commands.detect(get_paths(params))
 
 	elif "delete" in params:
-		commands.delete(commands.detect(getPaths(params)))
+		processed_files = commands.delete(commands.detect(get_paths(params)))
+		
 	elif "link" in params:
-		commands.link(commands.detect(getPaths(params)))
+		processed_files = commands.link(commands.detect(get_paths(params)))
+	
 	else:
 		commands.help()
+	
+	if len(processed_files) > 0:
+		pprint(processed_files)
+	else:
+		print("No duplicates found")
+		print("Great! Bye!")
+		
 	exit(0)
