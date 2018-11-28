@@ -1,0 +1,4 @@
+{
+	"python.pythonPath": "/anaconda3/envs/autopy/bin/python",
+	"python.linting.enabled": true
+}

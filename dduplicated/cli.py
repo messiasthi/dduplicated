@@ -2,7 +2,6 @@
 from os import path as opath, getcwd
 from pprint import pprint
 from sys import argv
-
 from dduplicated import commands
 
 def get_paths(params):
