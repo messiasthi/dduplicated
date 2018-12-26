@@ -18,24 +18,29 @@ def get_paths(params):
 def main():
 	params = argv
 	processed_files = []
+	verbose = False
+
 	# Remove the command name
 	del params[0]
 
+	if "verbose" in params:
+		verbose = True
+
 	if len(params) == 0 or "help" in params:
-		commands.help()
+		commands.show_help()
 		exit(0)
-		
+
 	elif "detect" in params:
-		processed_files = commands.detect(get_paths(params))
+		processed_files = commands.detect(get_paths(params), verbose)
 
 	elif "delete" in params:
-		processed_files = commands.delete(commands.detect(get_paths(params)))
-		
+		processed_files = commands.delete(commands.detect(get_paths(params), verbose), verbose)
+
 	elif "link" in params:
-		processed_files = commands.link(commands.detect(get_paths(params)))
-	
+		processed_files = commands.link(commands.detect(get_paths(params), verbose), verbose)
+
 	else:
-		commands.help()
+		commands.show_help()
 		exit(0)
 	
 	if len(processed_files) > 0:

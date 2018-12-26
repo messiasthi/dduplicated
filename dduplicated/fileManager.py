@@ -1,12 +1,21 @@
 import os
 from threading import Thread
 
-def _delete(path: str, src: str, link: bool):
+
+def _delete(path: str, src: str, symbolic_link: bool, verbose=False):
+	if verbose:
+		print("Delete the file: {}".format(path))
+
 	os.remove(path)
-	if link:
+
+	if symbolic_link:
+		if verbose:
+			print("Create symbolic link from {} to {}".format(path, src))
+
 		os.symlink(src, path)
 
-def manager_files(paths, link):
+
+def manager_files(paths, symbolic_link=False, verbose=False):
 	# The first file is preserved to not delete all files in directories.
 	first = True
 	src = ""
@@ -21,11 +30,10 @@ def manager_files(paths, link):
 				src = path
 			
 			else:
-				
-				Thread(target=_delete, args=(path, src, link)).start()
+				Thread(target=_delete, args=(path, src, symbolic_link, verbose)).start()
 				deleted_files.append(path)
 				
-				if link:
+				if symbolic_link:
 					linked_files.append(path)
 		
 		else:
@@ -35,21 +43,21 @@ def manager_files(paths, link):
 
 
 # Try The Voight-Kampff if you not recognize if is a replicant or not, all is suspect
-def manager(duplicates, create_link=False):
+def manager(duplicates, create_link=False, verbose=False):
 	if len(duplicates) == 0:
 		# Return empty list object
 		return []
 
 	processed_files = []
 	for files_by_hash in duplicates.values():
-		processed_files.append(manager_files(files_by_hash, create_link))
+		processed_files.append(manager_files(files_by_hash, create_link, verbose))
 	
 	return processed_files
 
 
-def delete(duplicates):
-	return manager(duplicates)
+def delete(duplicates, verbose=False):
+	return manager(duplicates, False, verbose)
 
 
-def link(duplicates):
-	return manager(duplicates, True)
+def link(duplicates, verbose=False):
+	return manager(duplicates, True, verbose)

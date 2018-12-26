@@ -6,6 +6,7 @@ ignored = ['..']
 files = {}
 visited = []
 
+
 def add_file(path):
 	global files
 	if not opath.islink(path):
@@ -16,21 +17,26 @@ def add_file(path):
 		else:
 			files.update({file_hash: [path]})
 
-def scan_dir(path):
+
+def scan_dir(path, verbose=False):
 	global visited
 	if not opath.islink(path) and path not in ignored and path not in visited:
 		visited.append(path)
-		for (root, directories, files) in walk(path, True):
+		for (root, directories, dir_files) in walk(path, True):
 			for d in directories:
+				if verbose:
+					print("Analyse the directory: {}\\{}".format(root, d))
 				scan_dir(opath.join(root, d))
 
-			for f in files:
+			for f in dir_files:
+				if verbose:
+					print("Analyse the file: {}\\{}".format(root, f))
 				add_file(opath.join(root, f))
 			
 
-def scan(paths):
+def scan(paths, verbose=False):
 	for path in paths:
-		scan_dir(path)
+		scan_dir(path, verbose)
 
 	duplicates = {}
 	# Clear files without duplicates
