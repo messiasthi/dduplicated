@@ -37,8 +37,9 @@ def manager_files(paths, link):
 # Try The Voight-Kampff if you not recognize if is a replicant or not, all is suspect
 def manager(duplicates, create_link=False):
 	if len(duplicates) == 0:
-		return None
-	
+		# Return empty list object
+		return []
+
 	processed_files = []
 	for files_by_hash in duplicates.values():
 		processed_files.append(manager_files(files_by_hash, create_link))
