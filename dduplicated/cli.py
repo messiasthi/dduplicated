@@ -23,7 +23,7 @@ def main():
 
 	if len(params) == 0 or "help" in params:
 		commands.help()
-		exit()
+		exit(0)
 		
 	elif "detect" in params:
 		processed_files = commands.detect(get_paths(params))
@@ -36,7 +36,7 @@ def main():
 	
 	else:
 		commands.help()
-		exit()
+		exit(0)
 	
 	if len(processed_files) > 0:
 		pprint(processed_files)
