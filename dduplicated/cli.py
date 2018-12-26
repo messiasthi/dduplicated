@@ -23,6 +23,8 @@ def main():
 
 	if len(params) == 0 or "help" in params:
 		commands.help()
+		exit()
+		
 	elif "detect" in params:
 		processed_files = commands.detect(get_paths(params))
 
