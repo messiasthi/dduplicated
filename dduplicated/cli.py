@@ -2,6 +2,7 @@
 from os import path as opath, getcwd
 from pprint import pprint
 from sys import argv
+
 from dduplicated import commands
 
 def get_paths(params):
@@ -33,6 +34,7 @@ def main():
 	
 	else:
 		commands.help()
+		exit()
 	
 	if len(processed_files) > 0:
 		pprint(processed_files)
