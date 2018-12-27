@@ -2,17 +2,17 @@ from dduplicated import scans, fileManager
 
 
 def detect(paths, verbose=False):
-	return scans.scan(paths, verbose)
+	return scans.scan(paths, False, False, verbose)
 
 
 # Remove all duplicates
 def delete(files, verbose=False):
-	return fileManager.delete(files, verbose)
+	return scans.scan(files, True, False, verbose)
 
 
 # Make the link to first file
 def link(files, verbose=False):
-	return fileManager.link(files, verbose)
+	return scans.scan(files, True, True, verbose)
 
 
 # Print the help menu
