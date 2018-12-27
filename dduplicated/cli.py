@@ -5,6 +5,7 @@ from sys import argv
 
 from dduplicated import commands
 
+
 def get_paths(params):
 	paths = []
 	for param in params:
