@@ -25,7 +25,6 @@ def main():
     del params[0]
     paths = get_paths(params)
 
-
     if "verbose" in params:
         verbose = True
 
