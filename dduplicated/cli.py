@@ -7,47 +7,61 @@ from dduplicated import commands
 
 
 def get_paths(params):
-	paths = []
-	for param in params:
-		path = opath.join(getcwd(), param)
-		if opath.exists(path) and opath.isdir(path) and not opath.islink(path):
-			paths.append(path)
+    paths = []
+    for param in params:
+        path = opath.join(getcwd(), param)
+        if opath.exists(path) and opath.isdir(path) and not opath.islink(path):
+            paths.append(path)
 
-	return paths
+    return paths
 
 
 def main():
-	params = argv
-	processed_files = []
-	verbose = False
+    params = argv
+    processed_files = []
+    verbose = False
 
-	# Remove the command name
-	del params[0]
+    # Remove the command name
+    del params[0]
+    paths = get_paths(params)
 
-	if "verbose" in params:
-		verbose = True
 
-	if len(params) == 0 or "help" in params:
-		commands.show_help()
-		exit(0)
+    if "verbose" in params:
+        verbose = True
 
-	elif "detect" in params:
-		processed_files = commands.detect(get_paths(params), verbose)
+    if len(params) == 0 or "help" in params:
+        commands.show_help()
+        exit(0)
 
-	elif "delete" in params:
-		processed_files = commands.delete(commands.detect(get_paths(params), verbose), verbose)
+    elif "detect" in params:
+        if len(paths) == 0:
+            print("Paths is not valid")
+            commands.show_help()
+            exit(0)
+        processed_files = commands.detect(paths, verbose)
 
-	elif "link" in params:
-		processed_files = commands.link(commands.detect(get_paths(params), verbose), verbose)
+    elif "delete" in params:
+        if len(paths) == 0:
+            print("Paths is not valid")
+            commands.show_help()
+            exit(0)
+        processed_files = commands.delete(paths, verbose)
 
-	else:
-		commands.show_help()
-		exit(0)
-	
-	if len(processed_files) > 0:
-		pprint(processed_files)
-	else:
-		print("No duplicates found")
-		print("Great! Bye!")
-		
-	exit(0)
+    elif "link" in params:
+        if len(paths) == 0:
+            print("Paths is not valid")
+            commands.show_help()
+            exit(0)
+        processed_files = commands.link(paths, verbose)
+
+    else:
+        commands.show_help()
+        exit(0)
+
+    if len(processed_files) > 0:
+        pprint(processed_files)
+    else:
+        print("No duplicates found")
+        print("Great! Bye!")
+
+    exit(0)
