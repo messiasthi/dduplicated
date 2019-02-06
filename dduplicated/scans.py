@@ -23,7 +23,7 @@ def _delete_file(file: str, link_path: str):
     # Create a symbolic link link if necessary
     if link and len(link_path) > 0:
         if verbose:
-            print("Create symbolic link from {} to {}".format(link_destiny, file))
+            print("Create symbolic link from {} to {}".format(link_path, file))
         symlink(link_path, file)
 
 
@@ -76,6 +76,8 @@ def scan(paths, del_files=False, create_link=False, verb=False):
     duplicates = {}
     # Clear files without duplicates
     for (file_hash, paths) in files.items():
+        if verbose:
+            print("Prepare print for this hash {}".format(file_hash))
         if len(paths) > 1:
             duplicates[file_hash] = paths
     return duplicates
