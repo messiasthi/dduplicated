@@ -24,6 +24,6 @@ def show_help():
 	\tdetect\tPATHS\tfor only search and detect duplicated files in directory.
 	\tdelete\tPATHS\tfor delete any duplicated files in directory, not first file.
 	\tlink\tPATHS\tfor link first all duplicates in first file.
-	\tno-verbose\t\tfor not show all steps executed
+	\tverbose\t\tfor not show all steps executed
 	\thelp\t\tshow this help
 	""")

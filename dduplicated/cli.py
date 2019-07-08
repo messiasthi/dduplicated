@@ -19,14 +19,14 @@ def get_paths(params):
 def main():
     params = argv
     processed_files = []
-    verbose = True
+    verbose = False
 
     # Remove the command name
     del params[0]
     paths = get_paths(params)
 
-    if "no-verbose" in params:
-        verbose = False
+    if "verbose" in params:
+        verbose = True
 
     if len(params) == 0 or "help" in params:
         commands.show_help()
