@@ -31,10 +31,10 @@ def add_file(path):
     global files, analysed, verbose, delete
     if not opath.islink(path) and path not in analysed:
         file_hash = hashs.get_hash(path)
+        analysed.append(path)
         # Check if the file_hash already analysed and if the path already exists in list referenced to hash
         if file_hash in files:
-            analysed.append(path)
-            obj = {"path": path, "duplicated": True, "original": files[file_hash][0]}
+            obj = {"path": path, "duplicated": True, "original": files[file_hash][0]["path"]}
 
             if delete:
                 obj.update({"deleted": delete, "link": link})
@@ -45,8 +45,9 @@ def add_file(path):
 
             files[file_hash].append(obj)
         else:
-            analysed.append(path)
-            files.update({file_hash: [path]})
+            obj = {"path": path, "original": True}
+            files.update({file_hash: []})
+            files[file_hash].append(obj)
 
 
 def scan_dir(path):
