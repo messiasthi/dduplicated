@@ -48,5 +48,8 @@ def main():
 	else:
 		print("No duplicates found")
 		print("Great! Bye!")
-		
+
 	exit(0)
+
+
+main()
