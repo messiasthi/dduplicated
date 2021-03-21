@@ -52,7 +52,12 @@ def main():
             commands.show_help()
             exit(0)
         processed_files = commands.link(paths, verbose)
-
+    elif "rmdir" in params:
+        if len(paths) == 0:
+            print("Paths is not valid")
+            commands.show_help()
+            exit(0)
+        processed_files = commands.rmdir(paths)
     else:
         commands.show_help()
         exit(0)
