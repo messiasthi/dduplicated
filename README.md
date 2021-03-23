@@ -5,8 +5,6 @@ A python script to remove all duplicated files in your directories.
 ## Install
 To install from source code use `python setup.py install`.
 
-Install by `pip` in comming soon.
-
 ## Tests
 
 You can use the directory `test/dirTest` for make your tests, I recommend copy the `dirTest` content for other directory and use the new directory for make any test you want.
