@@ -1,6 +1,5 @@
 import os
-from threading import Thread
-
+import stat
 
 def _delete(path: str, src: str, symbolic_link: bool, verbose=False):
     if verbose:
@@ -30,8 +29,7 @@ def manager_files(paths, symbolic_link=False, verbose=False):
                 src = path
 
             else:
-                Thread(target=_delete, args=(
-                    path, src, symbolic_link, verbose)).start()
+                _delete(path, src, symbolic_link, verbose)
                 deleted_files.append(path)
 
                 if symbolic_link:
@@ -65,34 +63,31 @@ def link(duplicates, verbose=False):
     return manager(duplicates, True, verbose)
 
 
-def _getEmptyDirsAndNot(path: str):
+def _getEmptyDirs(path: str):
     dirs = []
     for (root, directories, files) in os.walk(path, True):
         if len(directories) > 0:
             for directory in directories:
                 current = os.path.join(root, directory)
                 if len(os.listdir(current)) > 0:
-                    dirs = dirs + _getEmptyDirsAndNot(current)
+                    dirs = dirs + _getEmptyDirs(current)
                 else:
+                    print("Append directory: " + os.path.abspath(current))
                     dirs.append(current)
 
     return dirs
 
 
-
-
 def rrmdir(path:str):
     removed = []
     if os.path.isdir(os.path.abspath(path)):
-        dirs = list(dict.fromkeys(_getEmptyDirsAndNot(path)))
+        dirs = list(dict.fromkeys(_getEmptyDirs(path)))
         for d in dirs:
             try:
-                removed.append(d)
-                print('remove file ' + d)
+                removed.append(os.path.abspath(d))
+                print("Remove: " + os.path.abspath(d))
+                os.chmod(d, stat.S_IWUSR);
                 os.removedirs(d)
             except ValueError:
                 print(ValueError)
     return removed
-
-
-rrmdir('d')
