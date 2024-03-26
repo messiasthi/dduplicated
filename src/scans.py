@@ -57,12 +57,12 @@ def scan_dir(path):
         for (root, directories, dir_files) in walk(path, True):
             for d in directories:
                 if verbose:
-                    print("Analyse the directory: {}{}{}".format(root, sep, d))
+                    print("Analyse the directory: {root}{sep}{d}")
                 scan_dir(opath.join(root, d))
 
             for f in dir_files:
                 if verbose:
-                    print("Analyse the file: {}{}{}".format(root, sep, f))
+                    print("Analyse the file: {root}{sep}{f}")
                 add_file(opath.join(root, f))
 
 
