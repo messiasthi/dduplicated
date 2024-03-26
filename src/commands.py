@@ -1,4 +1,4 @@
-from dduplicated import scans, fileManager
+from src import scans, fileManager
 
 
 def detect(paths, verbose=False):
@@ -23,8 +23,7 @@ def rmdir(paths):
 # Print the help menu
 def show_help():
 	print("""
-	dduplicate is a simple script in python for detect and delete duplicate files in your directory
-	finded duplicated files, is possible delete, link or do nothing.
+	Krakenfiles is a software in python for detect duplicated files in your selected directory, is possible delete, link or just detect.
 	Command:
 	\tdetect\tPATHS\tfor only search and detect duplicated files in directory.
 	\tdelete\tPATHS\tfor delete any duplicated files in directory, not first file.

@@ -2,7 +2,7 @@ from os import path as opath, walk, sep, remove, symlink
 from threading import Thread
 from pprint import pprint
 
-from dduplicated import hashs
+from src import hashs
 
 ignored = ['..']
 files = {}

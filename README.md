@@ -1,16 +1,11 @@
-# dduplicated
+# Krakenfiles
 
-A python script to remove all duplicated files in your directories.
+A python script to search and destroy all duplications.
 
-## Install
-To install from source code use `python setup.py install`.
 
-## Tests
-
-You can use the directory `test/dirTest` for make your tests, I recommend copy the `dirTest` content for other directory and use the new directory for make any test you want.
 
 ## Help
-dduplicate is a script in python for detect duplicated files in your finded directory, is possible delete, link or just detect.
+Krakenfiles is a software in python for detect duplicated files in your selected directory, is possible delete, link or just detect.
 
 `dduplicate detect .` is default action
 

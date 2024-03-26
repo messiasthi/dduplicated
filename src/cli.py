@@ -1,9 +1,8 @@
-# The client of DDuplicated tool.
 from os import path as opath, getcwd
 from pprint import pprint
 from sys import argv
 
-from dduplicated import commands
+from src import commands
 
 
 def get_paths(params):
